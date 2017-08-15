@@ -1,8 +1,11 @@
 package com.comon.utils;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
@@ -21,13 +24,13 @@ public class JsonUtils {
 	 */
 	public static  <T> T json2Obj(String json,Class<T> clazz){
 		ObjectMapper objectMapper = new ObjectMapper();
-		try {
 			objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM:dd HH:mm:ss"));
-			return objectMapper.readValue(json, clazz);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
+			try {
+                return objectMapper.readValue(json, clazz);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
 	}
 	
 	/**
@@ -37,14 +40,14 @@ public class JsonUtils {
      * @return
      */
     public static String obj2Json(Object obj){
-        try {
         ObjectMapper objectMapper = new ObjectMapper();
             ObjectWriter ow = objectMapper.writer();
-            return ow.writeValueAsString(obj);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+            try {
+                return ow.writeValueAsString(obj);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+                return null;
+            }
     }
 	
 	public static void main(String[] args) {

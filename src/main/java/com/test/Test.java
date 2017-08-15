@@ -1,15 +1,17 @@
 package com.test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.security.DenyAll;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
@@ -18,7 +20,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.comon.utils.ConstantUtils;
+import com.comon.utils.JsonUtils;
 import com.comon.utils.RestMsgUtils;
+import com.test.entity.Menu;
 import com.test.service.TestService;
 
 @Path("/cate")
@@ -60,11 +65,29 @@ public class Test {
     
     @POST
     @Path("/{cateId}/anlimal3")
-    @Produces("application/json")
+    @Produces(ConstantUtils.CONTENT_TYPE_UTF8)
     @RolesAllowed("authenticated")
     public String getSomeResponse3(String params)throws Exception{
         System.out.println(params);
        return params;
-        
+    }
+    
+    
+    
+    
+    @GET
+    @RolesAllowed("authenticated")
+    @Path("/menu/{id}")
+    public Response get(@PathParam("id") String id){
+        Menu menu1 = new Menu(id,"系统管理","/sys","");
+        Menu menu2 = new Menu(id,"车辆管理","/sys","");
+        Menu menu3 = new Menu(id,"运营管理","/sys","");
+        Menu menu4 = new Menu(id,"监控管理","/sys","");
+        List<Menu> list = new ArrayList<>();
+        list.add(menu1);
+        list.add(menu2);
+        list.add(menu3);
+        list.add(menu4);
+        return RestMsgUtils.ok(list);
     }
 }

@@ -13,4 +13,6 @@
 
 <!-- 	<context:property-placeholder location="classpath:system.properties" /> -->
 
+    <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
+
 </beans>

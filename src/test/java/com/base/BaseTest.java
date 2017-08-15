@@ -30,18 +30,20 @@ public class BaseTest{
     public static String rest3Post(String url,Object data){
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(url);
-        Invocation.Builder builder = target.request();
+        Invocation.Builder builder = target.request()
+                .header("Authorization","hyqid");
         //Entity<String> entity = Entity.entity("hello world", "text/plain");
         Response response = builder.post(Entity.json(data));
         System.out.println("-------------Status:" + response.getStatus() + "--------");
         String result = response.readEntity(String.class);
-        return result;
+        return result; 
     }
 
     public static String rest3Get(String url){
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(url);
-        Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON_TYPE.withCharset("utf-8"));
+        Invocation.Builder builder = target.request(MediaType.APPLICATION_JSON_TYPE.withCharset("utf-8"))
+                .header("Authorization","hyqid");
         Response response = builder.get();
         System.out.println("-------------Status:" + response.getStatus() + "--------");
         String result = response.readEntity(String.class);
@@ -54,7 +56,7 @@ public class BaseTest{
         Map<String,Object> data = new HashMap<>();
         data.put("a", "123");
         data.put("b", "反反复复");
-        String value = rest3Post("http://localhost:9999/RestEasyApi/cate/1/anlimal3",data); 
+        String value = rest3Post("http://localhost:9999/RestEasyApi/menu/222",data); 
         System.out.println(value);
     }
     
@@ -64,9 +66,8 @@ public class BaseTest{
         data.put("b", "反反复复");
         
 //        String value = rest3Get("http://localhost:9999/RestEasyApi/cate/1/anlimal2"); 
-        String value = rest3Post("http://localhost:9999/RestEasyApi/cate/1/anlimal3",data); 
-//       String value = rest3Get("http://localhost:9999/RestEasyApi/user-management/users");
-       // String value = rest3Get("http://localhost:9999/RestEasyApi/listener/ping");
+//        String value = rest3Post("http://localhost:9999/RestEasyApi/menu/222",data); 
+        String value = rest3Get("http://localhost:9999/RestEasyApi/menu/222"); 
         System.out.println(value);
     }
     
