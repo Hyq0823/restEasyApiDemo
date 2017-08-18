@@ -15,7 +15,7 @@ public class MenuTest extends BaseTest {
     public void testGetMenu(){
         data.put("a", "123");
         data.put("b", "反反复复");
-        String value = rest3Post("http://localhost:9999/RestEasyApi/menu/222",data); 
+        String value = executePost("http://localhost:9999/RestEasyApi/menu/222",data); 
        System.out.println(value);
     }
 }

@@ -2,6 +2,7 @@ package com.comon.filter;
 
 import javax.ws.rs.NotAllowedException;
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.NotSupportedException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -25,13 +26,20 @@ public class ApplicationExceptionHandler implements ExceptionMapper<Exception> {
 
     @Override
     public Response toResponse(Exception e) {
+        e.printStackTrace();
         logger.error(e.getMessage());
-        if (e instanceof NotFoundException) {// return Response.status(Status.NOT_FOUND).build();
+        
+        if (e instanceof NotFoundException) {
             return Response.status(Status.NOT_FOUND).build();
         }
         if(e instanceof NotAllowedException){
             return Response.status(Status.METHOD_NOT_ALLOWED).build();
         }
+        if(e instanceof NotSupportedException){
+            return Response.status(Status.NOT_ACCEPTABLE).build();
+        }
+        
+        
         return RestMsgUtils.fail(e);
     }
 

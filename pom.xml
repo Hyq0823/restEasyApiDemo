@@ -14,11 +14,14 @@
 		<spring.version>4.3.7.RELEASE</spring.version>
 		<slf4j-api.version>1.6.0</slf4j-api.version>
 		<logback.version>0.9.28</logback.version>
-	    <hibernate-validator.version>5.3.3.Final</hibernate-validator.version>
+		<hibernate-validator.version>5.3.3.Final</hibernate-validator.version>
+		<junit.version>4.10</junit.version>
+		<mockito.version>1.9.5</mockito.version>
 	</properties>
 
 	<dependencies>
-        
+
+        <!-- restEasy  -->
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
@@ -29,6 +32,12 @@
 			<artifactId>resteasy-jaxb-provider</artifactId>
 			<version>${resteasy.version}</version>
 		</dependency>
+		
+		<dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-multipart-provider</artifactId>
+            <version>${resteasy.version}</version>
+        </dependency>
 
 
 		<!-- restEasy client -->
@@ -42,31 +51,37 @@
 			<artifactId>resteasy-client</artifactId>
 			<version>${resteasy.version}</version>
 		</dependency>
-		
-		
+
+
 		<!-- rest-spring -->
-	<dependency>
-		<groupId>org.jboss.resteasy</groupId>
-		<artifactId>resteasy-spring</artifactId>
-		<version>${resteasy.version}</version>
-	</dependency>
-	
-	
-	  <!-- Spring -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        
-         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        
-        <!-- log4j properties -->
-        <!-- logback+slf4j -->  
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-spring</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+
+
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- log4j properties -->
+		<!-- logback+slf4j -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -74,33 +89,48 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-core</artifactId>
-				<version>${logback.version}</version>
-				<type>jar</type>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>${logback.version}</version>
-				<type>jar</type>
-			</dependency>  
-			
-			
-			<!-- jackson -->
-			<dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson2-provider</artifactId>
-            <version>${resteasy.version}</version>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<type>jar</type>
+		</dependency>
+
+
+		<!-- jackson -->
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson2-provider</artifactId>
+			<version>${resteasy.version}</version>
+		</dependency>
+
+		<!-- hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+		
+		<!-- junit & mockito -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>${mockito.version}</version>
+            <scope>test</scope>
         </dependency>
 
-	<dependency>
-		<groupId>org.hibernate</groupId>
-		<artifactId>hibernate-validator</artifactId>
-		<version>${hibernate-validator.version}</version>
-	</dependency>
-			
 
 	</dependencies>
 
@@ -117,16 +147,16 @@
 			</plugin>
 
 
-	<!-- war 打包插件, 设定war包名称不带版本号 -->
-	<plugin>
-		<groupId>org.apache.maven.plugins</groupId>
-		<artifactId>maven-war-plugin</artifactId>
-		<!-- <version>2.5.1</version> -->
-		<version>2.4</version>
-		<configuration>
-			<warName>${project.artifactId}</warName>
-		</configuration>
-	</plugin>
+			<!-- war 打包插件, 设定war包名称不带版本号 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<!-- <version>2.5.1</version> -->
+				<version>2.4</version>
+				<configuration>
+					<warName>${project.artifactId}</warName>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

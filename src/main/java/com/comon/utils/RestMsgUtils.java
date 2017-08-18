@@ -37,6 +37,20 @@ public class RestMsgUtils {
      * @return
      */
     public static Response ok(Object data){
+        return Response.status(Status.OK).entity(getSuccessDataMap(data)).build();
+    }
+    
+    /**
+     * 响应成功
+     * @param data
+     * @return
+     */
+    public static Response ok(){
+        return Response.status(Status.OK).entity(getSuccessDataMap(null)).build();
+    }
+    
+    
+    private static  Map<String,Object>  getSuccessDataMap(Object data){
         Map<String,Object> result = new HashMap<>();
         result.put(ConstantUtils.ERROR_CODE,ErrorUtils.SUCCESS);
         result.put(ConstantUtils.ERROR_MSG,"处理成功!");
@@ -47,20 +61,7 @@ public class RestMsgUtils {
         }else{
             result.put(ConstantUtils.DATA,data==null?new HashMap<String, Object>():data);
         }
-        return Response.status(Status.OK).entity(result).build();
-    }
-    
-    /**
-     * 响应成功
-     * @param data
-     * @return
-     */
-    public static Response ok(){
-        Map<String,Object> result = new HashMap<>();
-        result.put(ConstantUtils.ERROR_CODE,ErrorUtils.SUCCESS);
-        result.put(ConstantUtils.ERROR_MSG,"处理成功!");
-            result.put(ConstantUtils.DATA,new HashMap<String, Object>());
-        return Response.status(Status.OK).entity(result).build();
+       return result;
     }
    
 }

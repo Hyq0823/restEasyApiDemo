@@ -7,6 +7,7 @@ public class ConstantUtils {
     public static String ARRAY = "array";
     
     
+    public static final String FILE = "file";
     public static final String CONTENT_TYPE = "application/json";
     public static final String CONTENT_TYPE_UTF8="application/json;charset=utf-8";
 }
